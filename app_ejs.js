@@ -8,11 +8,25 @@ const app = express();
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const { getDB, setDB } = require("./database");
+const morgan = require("morgan");
+const { addUser } = require("./db_mongo");
 
-// Middleware
+// Middleware -- runs on every request by execution order
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(morgan("dev")); // Logger Middleware
+app.use(express.static("public")); // Enable a directory to be publicly accessed
+
+// Custom Middleware <---- Every custom middleware has this format at its core
+// app.use((req, res, next) => {
+//   console.log("New Request to the server:");
+//   console.log("host:" + req.hostname);
+//   console.log("path:" + req.path);
+//   console.log("method:" + req.method);
+//   // req.next(); or
+//   next();
+// });
 
 // Start the server
 app.listen(3000, () => {
@@ -55,6 +69,11 @@ app.get("/checkdb", (req, res) => {
   res.send(db);
 });
 
+app.get("/mongo/check", async (req, res) => {
+  const user = { name: "shuba", password: "metro123" };
+  addUser(user);
+  res.send(200);
+});
 app.use((req, res) => {
   res.render("404");
 });
