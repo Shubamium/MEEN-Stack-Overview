@@ -1,3 +1,5 @@
+const fs = require("fs");
+const dbDir = "./db.json";
 function getDB() {
   // Check if database exist or not make one if it doesn't exist
   if (!fs.existsSync(dbDir)) {

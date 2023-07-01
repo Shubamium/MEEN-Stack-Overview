@@ -6,7 +6,6 @@ const express = require("express");
 // Set up express and dependencies
 const app = express();
 const fs = require("fs");
-const dbDir = "./db.json";
 const { v4: uuidv4 } = require("uuid");
 const { getDB, setDB } = require("./database");
 
@@ -48,7 +47,7 @@ app.post("/blogs/create/add", (req, res) => {
   db.blogs.push({ id: uuidv4(), ...formData });
   setDB(db);
 
-  res.redirect("./");
+  res.redirect("../../");
 });
 
 app.get("/checkdb", (req, res) => {

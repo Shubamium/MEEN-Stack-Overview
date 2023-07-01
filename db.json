@@ -1,15 +1,1 @@
-{
-  "status": "active",
-  "blogs": [
-    {
-      "id": "3df3acde-d549-4ada-abfb-bf333e922244",
-      "title": "Meow",
-      "content": "Post lorem edoedjoawdjoawjdoawjdoawjdoawjdo"
-    },
-    {
-      "id": "d4185147-80ef-41c2-9af8-09ca28788c0a",
-      "title": "This is the second blog",
-      "content": "Yada Yada Yaday"
-    }
-  ]
-}
+{"status":"active","blogs":[{"id":"3df3acde-d549-4ada-abfb-bf333e922244","title":"Meow","content":"Post lorem edoedjoawdjoawjdoawjdoawjdoawjdo"},{"id":"d4185147-80ef-41c2-9af8-09ca28788c0a","title":"This is the second blog","content":"Yada Yada Yaday"},{"id":"9e4635bd-b407-4dca-be6c-50b64334bd3e","title":"Added Poster","content":"Poseteede"},{"id":"10c70a54-a8de-4474-b686-65c266bcf124","title":"Meow","content":"Adedded Postededawdadawd"},{"id":"d3e0aa83-0efb-4fd4-8147-d2730c2a9bf0","title":"Meow ","content":"wadjoawdjoawdaw"}]}
