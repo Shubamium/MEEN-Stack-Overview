@@ -9,7 +9,9 @@ const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const { getDB, setDB } = require("./database");
 const morgan = require("morgan");
-const { addUser } = require("./db_mongo");
+// const { addUser } = require("./db_mongo"); <- Official MongoDB Driver
+const { connectDB } = require("./db_odm");
+const Blog = require("./models/blog");
 
 // Middleware -- runs on every request by execution order
 app.set("view engine", "ejs");
@@ -29,8 +31,10 @@ app.use(express.static("public")); // Enable a directory to be publicly accessed
 // });
 
 // Start the server
-app.listen(3000, () => {
-  console.log("Views Engine Started: Listening on port:" + 3000);
+connectDB(() => {
+  app.listen(3000, () => {
+    console.log("Views Engine Started: Listening on port:" + 3000);
+  });
 });
 
 // Routes Definitions
@@ -73,6 +77,21 @@ app.get("/mongo/check", async (req, res) => {
   const user = { name: "shuba", password: "metro123" };
   addUser(user);
   res.send(200);
+});
+
+app.get("/mongo/add", async (req, res) => {
+  const newBlog = new Blog({
+    title: "This is model post blog",
+    content: "This is the content lorem lorem lorem lorem 122412",
+  });
+
+  const newDoc = await newBlog.save();
+  res.send(newDoc);
+});
+
+app.get("/mongo/peek", async (req, res) => {
+  let blog = await Blog.find();
+  res.send(blog);
 });
 app.use((req, res) => {
   res.render("404");
